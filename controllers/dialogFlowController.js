@@ -6,6 +6,10 @@ module.exports = {
     res.send(result[0].queryResult);
   },
   eventQuery: async (req, res) => {
-    res.send({ say: "Hi!! from event" });
+    const result = await chatBot.eventQuery(
+      req.body.event,
+      req.body.parameters
+    );
+    res.send(result[0].queryResult);
   }
 };

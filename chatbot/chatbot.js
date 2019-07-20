@@ -1,4 +1,5 @@
 const dialogflow = require("dialogflow");
+const structjson = require("./structjson");
 const {
   googleProjectID,
   dialogFlowSessionID,
@@ -19,6 +20,27 @@ module.exports = {
       queryInput: {
         text: {
           text: text,
+          languageCode: dialogFlowSessionLanguageCode
+        }
+      },
+      queryParams: {
+        payload: {
+          data: parameters
+        }
+      }
+    };
+    let responses = await sessionClient.detectIntent(request);
+    responses = await self.handleAction(responses);
+    return responses;
+  },
+  eventQuery: async (event, parameters = {}) => {
+    const self = module.exports;
+    const request = {
+      session: sessionPath,
+      queryInput: {
+        event: {
+          name: event,
+          parameters: structjson.jsonToStructProto(parameters),
           languageCode: dialogFlowSessionLanguageCode
         }
       },
