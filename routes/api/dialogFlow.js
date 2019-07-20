@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const {
-  postDfTextQuery,
-  postDfEventQuery
+  textQuery,
+  eventQuery
 } = require("../../controllers/dialogFlowController");
 
-router.post("/df_text_query", postDfTextQuery);
-router.post("/df_event_query", postDfEventQuery);
+router.post("/df_text_query", textQuery);
+router.post("/df_event_query", eventQuery);
 
 module.exports = router;
