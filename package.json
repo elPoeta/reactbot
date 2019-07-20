@@ -1,0 +1,32 @@
+{
+  "name": "reactbot",
+  "version": "1.0.0",
+  "description": "Experiment with bots and dialogflow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elPoeta/reactbot.git"
+  },
+  "keywords": [
+    "bots",
+    "bot",
+    "dialogflow"
+  ],
+  "author": "Leonardo Tosetto (leonardo.a.tosetto@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elPoeta/reactbot/issues"
+  },
+  "homepage": "https://github.com/elPoeta/reactbot#readme",
+  "dependencies": {
+    "concurrently": "^4.1.1",
+    "dialogflow": "^0.10.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
