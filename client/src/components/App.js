@@ -7,14 +7,16 @@ import Header from "./Header";
 import Chatbot from "./chatbot/Chatbot";
 
 const App = () => (
-  <div>
+  <div style={{ padding: 0, margin: 0 }}>
     <BrowserRouter>
       <div>
         <Header />
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/shop" component={Shop} />
-        <Route exact path="/about" component={About} />
-        <Chatbot />
+        <div className="container">
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/shop" component={Shop} />
+          <Route exact path="/about" component={About} />
+          <Chatbot />
+        </div>
       </div>
     </BrowserRouter>
   </div>
