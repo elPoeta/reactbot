@@ -22,10 +22,10 @@ const sessionPath = sessionClient.sessionPath(
 );
 
 module.exports = {
-  textQuery: async (text, parameters = {}) => {
+  textQuery: async (text, userID, parameters = {}) => {
     const self = module.exports;
     const request = {
-      session: sessionPath,
+      session: sessionPath + userID,
       queryInput: {
         text: {
           text: text,
@@ -42,10 +42,10 @@ module.exports = {
     responses = await self.handleAction(responses);
     return responses;
   },
-  eventQuery: async (event, parameters = {}) => {
+  eventQuery: async (event, userID, parameters = {}) => {
     const self = module.exports;
     const request = {
-      session: sessionPath,
+      session: sessionPath + userID,
       queryInput: {
         event: {
           name: event,

@@ -1,63 +1,110 @@
 import React, { Component } from "react";
+import { v4 as uuid } from "uuid";
+import Cookies from "universal-cookie";
 import Http from "../../utils/Http";
 import "./Chatbot.css";
 
+const cookies = new Cookies();
+
 class Chatbot extends Component {
-  state = {
-    messages: [],
-    text: ""
-  };
+  messageEnd;
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: []
+    };
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    if (cookies.get("userID") === undefined) {
+      cookies.set("userID", uuid(), { path: "/" });
+    }
+  }
 
-  handleChange = e => {
-    this.setState({
-      text: e.target.value
-    });
-  };
-
-  handleClick = async e => {
+  componentDidMount() {
+    this.sendEventQuery("Welcome");
+  }
+  componentDidUpdate() {
+    this.messageEnd.scrollIntoView({ behaviour: "smooth" });
+  }
+  handleKeyPress(e) {
+    if (e.key === "Enter") {
+      if (e.target.value) {
+        this.sendTextQuery(e.target.value);
+        e.target.value = "";
+      }
+    }
+  }
+  async sendTextQuery(text) {
     let says = {
       speak: "me",
       msg: {
         text: {
-          text: this.state.text
+          text: text
         }
       }
     };
-    this.setState({ messages: [...this.state.messages, says] });
-    const data = await this.sendMessage(this.state.text);
-    console.log(data);
-    for (let msg of data.fulfillmentMessages) {
-      says = {
-        speak: "bot",
-        msg
-      };
-    }
-    this.setState({ messages: [...this.state.messages, says] });
-    console.log(this.state.messages);
-  };
-  async sendMessage(text) {
+    this.setState({
+      messages: [...this.state.messages, says]
+    });
     try {
-      const response = await Http.post("api/bot/df_text_query", { text });
-      return await response;
+      const response = await Http.post("api/bot/df_text_query", {
+        text,
+        userID: cookies.get("userID")
+      });
+      if (response.fulfillmentMessages) {
+        for (let msg of response.fulfillmentMessages) {
+          says = {
+            speak: "bot",
+            msg
+          };
+        }
+        this.setState({
+          messages: [...this.state.messages, says]
+        });
+      }
     } catch (error) {
       console.error(error.messages);
     }
   }
+
+  async sendEventQuery(event) {
+    let says = {};
+    try {
+      const response = await Http.post("api/bot/df_event_query", {
+        event,
+        userID: cookies.get("userID")
+      });
+      for (let msg of response.fulfillmentMessages) {
+        says = {
+          speak: "bot",
+          msg
+        };
+      }
+      this.setState({
+        messages: [...this.state.messages, says]
+      });
+    } catch (error) {
+      console.error(error.messages);
+    }
+  }
+
   render() {
-    const { text, messages } = this.state;
+    const { messages } = this.state;
     return (
       <div className="Chatbot">
-        {text}
         <div id="chatbot" className="Chatbot-flow">
-          <h2>ChatBot</h2>
+          <h4>ChatBot</h4>
           {messages.map(m => (
             <div>
               <p>{m.speak}</p>
               <p>{m.msg.text.text}</p>
             </div>
           ))}
-          <input type="text" onChange={this.handleChange} value={text} />
-          <button onClick={this.handleClick}>Send</button>
+          <div
+            ref={el => {
+              this.messageEnd = el;
+            }}
+          />
+          <input type="text" onKeyPress={this.handleKeyPress} />
         </div>
       </div>
     );
