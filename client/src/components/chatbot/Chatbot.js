@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid";
 import Cookies from "universal-cookie";
 import Http from "../../utils/Http";
 import "./Chatbot.css";
+import Message from "./Message";
 
 const cookies = new Cookies();
 
@@ -87,18 +88,23 @@ class Chatbot extends Component {
     }
   }
 
+  renderMessages(msg) {
+    if (msg.length > 0) {
+      return msg.map(m => (
+        <Message key={uuid()} speak={m.speak} text={m.msg.text.text} />
+      ));
+    } else {
+      return null;
+    }
+  }
+
   render() {
     const { messages } = this.state;
     return (
       <div className="Chatbot">
         <div id="chatbot" className="Chatbot-flow">
           <h4>ChatBot</h4>
-          {messages.map(m => (
-            <div>
-              <p>{m.speak}</p>
-              <p>{m.msg.text.text}</p>
-            </div>
-          ))}
+          {this.renderMessages(messages)}
           <div
             ref={el => {
               this.messageEnd = el;

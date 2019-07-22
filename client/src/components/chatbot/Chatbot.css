@@ -12,3 +12,58 @@
   height: 100%;
   overflow: auto;
 }
+
+.Chatbot-buble {
+  width: 300px;
+  margin: 50px auto;
+  border-radius: 15px;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-weight: 900;
+  font-family: arial;
+  position: relative;
+}
+.Chatbot-buble-speak {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  text-align: center;
+  position: absolute;
+  top: -45px;
+  left: -45px;
+}
+
+/* speech bubble user */
+.Chatbot-buble-user-color {
+  background: #1097b9;
+}
+.Chatbot-buble-user:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 15px solid #1097b9;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #1097b9;
+  border-bottom: 15px solid transparent;
+  right: -16px;
+  top: 0px;
+}
+
+/* speech bubble bot */
+.Chatbot-buble-bot-color {
+  background: #7498fc;
+}
+.Chatbot-buble-bot:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 15px solid transparent;
+  border-right: 15px solid #7498fc;
+  border-top: 15px solid #7498fc;
+  border-bottom: 15px solid transparent;
+  left: -16px;
+  top: 0px;
+}
