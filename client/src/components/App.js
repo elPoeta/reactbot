@@ -6,12 +6,14 @@ import About from "./pages/About";
 import Header from "./Header";
 import Chatbot from "./chatbot/Chatbot";
 
+import('./App.css');
+
 const App = () => (
-  <div style={{ padding: 0, margin: 0 }}>
+  <div>
     <BrowserRouter>
       <div>
         <Header />
-        <div className="container">
+        <div className="App-container">
           <Route exact path="/" component={Landing} />
           <Route exact path="/shop" component={Shop} />
           <Route exact path="/about" component={About} />

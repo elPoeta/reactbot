@@ -1,0 +1,34 @@
+.Header-nav-wrapper{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+} 
+.Header-blue{
+    height: 80px;
+    background: #42a5f5;
+    font-weight: bold;
+}
+
+.Header-blue-lighten{
+    color: #e3f2fd;
+}
+
+.Header-brand-logo{
+    margin-right: auto;
+    align-self: center;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.Header-nav-list{
+    list-style-type: none;
+}
+
+.Header-nav-list > li{
+    display: inline;
+    padding: 10px;
+}
+
+.Header-nav-list > li a{
+    text-decoration: none;
+}

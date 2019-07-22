@@ -1,16 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+import('./Header.css');
+
 const Header = () => (
-  <nav className="nav-wrapper blue lighten-1">
-    <Link to={"/"} className="brand-logo">
+  <nav className="Header-nav-wrapper Header-blue">
+    <Link to={"/"} className="Header-brand-logo Header-blue-lighten">
       ChatBot
     </Link>
-    <ul id="nav-mobile" className="right hide-on-med-and-down">
+    <ul id="nav-mobile" className="Header-nav-list hide-on-med-and-down">
       <li>
-        <Link to={"/shop"}>Shop</Link>
+        <Link className='Header-blue-lighten' to={"/shop"}>Shop</Link>
       </li>
       <li>
-        <Link to={"/about"}>About</Link>
+        <Link className='Header-blue-lighten' to={"/about"}>About</Link>
       </li>
     </ul>
   </nav>
