@@ -110,7 +110,7 @@ class Chatbot extends Component {
               this.messageEnd = el;
             }}
           />
-          <input type="text" onKeyPress={this.handleKeyPress} />
+          <input type="text" onKeyPress={this.handleKeyPress} className="Chatbot-input-send" />
         </div>
       </div>
     );
